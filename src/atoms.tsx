@@ -7,7 +7,7 @@ export const countState = atom({
 
 export const timerState = atom({
   key: "remainTime",
-  default: 10,
+  default: 1500,
 });
 
 export const toggleState = atom({

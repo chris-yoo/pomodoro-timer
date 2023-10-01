@@ -3,6 +3,9 @@ import { useRecoilState } from "recoil";
 import { timerState, toggleState } from "./atoms";
 import Timer from "./components/Timer";
 import styled from "styled-components";
+import { motion } from "framer-motion";
+import { FaPause, FaPlay } from "react-icons/fa";
+import CountUp from "./components/CountUp";
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -19,6 +22,20 @@ const Title = styled.div`
   font-weight: 900;
 `;
 
+const StyledButton = styled(motion.button)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  font-size: 50px;
+  border: none;
+`;
+
 function App() {
   const [toggleValue, setToggleValue] = useRecoilState(toggleState);
   const onClick = () => {
@@ -29,7 +46,14 @@ function App() {
     <Wrapper>
       <Title>Pomodoro</Title>
       <Timer toggle={toggleValue} />
-      <button onClick={onClick}>{toggleValue ? "pause" : "start"}</button>
+      <StyledButton
+        whileHover={{ scale: 1.5 }}
+        whileTap={{ scale: 1 }}
+        onClick={onClick}
+      >
+        {toggleValue ? <FaPause /> : <FaPlay />}
+      </StyledButton>
+      <CountUp />
     </Wrapper>
   );
 }
